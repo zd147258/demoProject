@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xx.test.dao.OooMapper">
+
+	<insert id="insert" parameterType="com.xx.test.po.OooPO">
+		insert into ooo(
+			id
+			,name
+		) values(
+			#{id}
+			,#{name}
+		)
+	</insert>
+
+	<delete id="deleteBy" parameterType="com.xx.test.po.OooPO">
+		delete from ooo
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="name != null and name != ''">
+				and name = #{name}
+			</if>
+		</where>
+	</delete>
+
+	<update id="updateById" parameterType="com.xx.test.po.OooPO">
+		update ooo
+		<set>
+			<if test="name != null and name != ''">
+				name = #{name},
+			</if>
+		</set>
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+		</where>
+	</update>
+
+	<update id="updateBy">
+		update ooo
+		<set>
+			<if test="set.id != null">
+				id = #{set.id},
+			</if>
+			<if test="set.name != null and set.name != ''">
+				name = #{set.name},
+			</if>
+		</set>
+		<where>
+			<if test="where.id != null">
+				and id = #{where.id}
+			</if>
+			<if test="where.name != null and where.name != ''">
+				and name = #{where.name}
+			</if>
+		</where>
+	</update>
+
+	<select id="getCheckBy" parameterType="com.xx.test.po.OooPO" resultType="java.lang.Integer">
+		select count(1) from ooo
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="name != null and name != ''">
+				and name = #{name}
+			</if>
+		</where>
+	</select>
+
+	<select id="getModelBy" parameterType="com.xx.test.po.OooPO" resultType="com.xx.test.po.OooPO">
+		select
+			id as id
+			,name as name
+		from ooo
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="name != null and name != ''">
+				and name = #{name}
+			</if>
+		</where>
+	</select>
+
+	<select id="getList" parameterType="com.xx.test.po.OooPO" resultType="com.xx.test.po.OooPO">
+		select
+			id as id
+			,name as name
+		from ooo
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="name != null and name != ''">
+				and name = #{name}
+			</if>
+		</where>
+		<!-- 鎺掑簭淇℃伅 -->
+		<if test="orderBy != null and orderBy != ''">
+			ORDER BY ${orderBy}
+		</if>
+	</select>
+
+	<select id="getListPage" parameterType="com.xx.test.po.OooPO" resultType="com.xx.test.po.OooPO">
+		select
+			id as id
+			,name as name
+		from ooo
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="name != null and name != ''">
+				and name = #{name}
+			</if>
+			<if test="nameLike != null and nameLike != ''">
+				and name like concat('%',#{nameLike},'%')
+			</if>
+		</where>
+		<!-- 鎺掑簭淇℃伅 -->
+		<if test="orderBy != null and orderBy != ''">
+			ORDER BY ${orderBy}
+		</if>
+	</select>
+
+	<insert id="insertBatch" parameterType="java.util.List">
+		insert into ooo(
+			id
+			,name
+		) values
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+			#{item.id}
+			,#{item.name}
+		)
+		</foreach>
+	</insert>
+
+</mapper>
