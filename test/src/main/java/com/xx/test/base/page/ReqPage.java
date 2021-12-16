@@ -1,4 +1,4 @@
-package com.xx.test.base;
+package com.xx.test.base.page;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
