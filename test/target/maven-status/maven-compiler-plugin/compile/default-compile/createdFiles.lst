@@ -9,11 +9,13 @@ com\xx\test\constant\BaseRspConstants.class
 com\xx\test\constant\Oooconstant.class
 com\xx\test\util\HbSignUtil.class
 com\xx\test\util\UserAgentUtil.class
+com\xx\test\base\ReqPage.class
 com\xx\test\po\hahah.class
 com\xx\test\po\IntPushFwaProtocolBsRspBO.class
 com\xx\test\util\HttpsUtil$TrustAnyTrustManager.class
 com\xx\test\bo\OooBO.class
 com\xx\test\po\SscJoinSupPO.class
+com\xx\test\bo\OooListServiceReqBO.class
 com\xx\test\impl\test.class
 com\xx\test\dao\OooMapper.class
 com\xx\test\schedule\ScheduleTask.class
@@ -33,6 +35,9 @@ com\xx\test\util\ExcelUtil.class
 com\xx\test\impl\AbstractDemo.class
 com\xx\test\impl\ServiceApplication.class
 com\xx\test\bo\RspBaseBO.class
+com\xx\test\base\RspPage.class
+com\xx\test\base\Page.class
+com\xx\test\bo\OooListServiceRspBO.class
 com\xx\test\bo\OooServiceRspBO.class
 com\xx\test\service\intImpl.class
 com\xx\test\po\NameSpace.class
