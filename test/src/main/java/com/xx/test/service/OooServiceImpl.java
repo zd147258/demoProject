@@ -2,7 +2,8 @@ package com.xx.test.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.xx.test.base.Page;
+import com.xx.test.base.Exception.ZTBusinessException;
+import com.xx.test.base.page.Page;
 import com.xx.test.bo.*;
 import com.xx.test.constant.BaseRspConstants;
 import com.xx.test.dao.OooMapper;
@@ -15,6 +16,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 标题: OooServiceImpl
@@ -28,6 +30,8 @@ public class OooServiceImpl implements OooService{
 
     @Autowired
     private OooMapper oooMapper;
+    @Autowired
+    private DictionaryService dictionaryService;
 
     @Override
     public OooServiceRspBO selectOoo(OooServiceReqBO reqBO) {
@@ -38,8 +42,13 @@ public class OooServiceImpl implements OooService{
         qryParam.setId(reqBO.getId());
         log.info("qryParam:{}", JSON.toJSONString(qryParam));
         OooPO qryResult = oooMapper.getModelBy(qryParam);
+        if (null == qryResult){
+            throw new ZTBusinessException(BaseRspConstants.RSP_CODE_FAILD, "查询结果为空！");
+        }
+        Map<String, String> supplierTypeMap = dictionaryService.queryBypCodeBackMap("UMC", "SUPPLIER_TYPE");
         OooBO oooBO = new OooBO();
         BeanUtils.copyProperties(qryResult, oooBO);
+        oooBO.setIdStr(supplierTypeMap.get(String.valueOf(oooBO.getId())));
         rspBO.setOooBO(oooBO);
         return rspBO;
     }
@@ -52,7 +61,6 @@ public class OooServiceImpl implements OooService{
         OooPO qryParam = new OooPO();
         BeanUtils.copyProperties(reqBO, qryParam);
         log.info("qryParam:{}", JSON.toJSONString(qryParam));
-        log.info("dev");
         List<OooPO> qryResult = oooMapper.getListPage(qryParam, page);
         if (CollectionUtils.isEmpty(qryResult)){
             rspBO.setPageNo(0);

@@ -1,6 +1,6 @@
 package com.xx.test.dao;
 
-import com.xx.test.base.Page;
+import com.xx.test.base.page.Page;
 import com.xx.test.po.OooPO;
 import org.apache.ibatis.annotations.Param;
 

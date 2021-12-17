@@ -1,6 +1,6 @@
 package com.xx.test.bo;
 
-import com.xx.test.base.ReqPage;
+import com.xx.test.base.page.ReqPage;
 import lombok.Data;
 
 @Data

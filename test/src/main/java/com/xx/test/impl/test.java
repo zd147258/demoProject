@@ -2,6 +2,7 @@ package com.xx.test.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
 import com.xx.test.bo.OooServiceReqBO;
 import com.xx.test.bo.OooServiceRspBO;
 import com.xx.test.service.OooService;
@@ -18,9 +19,7 @@ import javax.xml.bind.JAXBException;
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Slf4j
 public class test {
@@ -248,11 +247,39 @@ public class test {
         log.info("info日志");
         log.warn("warn日志");
         log.error("error日志");*/
-        OooService oooService = new OooServiceImpl();
-        OooServiceReqBO oooServiceReqBO = new OooServiceReqBO();
-        oooServiceReqBO.setId(1L);
-        OooServiceRspBO rspBO = oooService.selectOoo(oooServiceReqBO);
-        log.info("OooServiceRspBO:{}", JSON.toJSONString(rspBO));
+        /**
+         * guava map
+         */
+/*        Map<Integer, Integer> map0 = Maps.newHashMap();
+        for (int i = 0; i < 10; i++) {
+            map0.put(i, i);
+        }
+        System.out.println("map0：" + map0);
+
+        Map<Integer, Integer> map1 = Maps.newHashMap(map0);
+        map1.put(10, 10);
+        System.out.println("map1：" + map1);
+
+        //下面的这个写法呢是在初始化list的时候，说明容器的扩容界限值
+        //使用条件：你确定你的容器会装多少个，不确定就用一般形式的
+        //说明：这个容器超过3个还是会自动扩容的。不用担心容量不够用。默认是分配一个容量为16的数组，不够将扩容
+        //详细见后面说明
+        Map<Integer, Integer> map2 = Maps.newHashMapWithExpectedSize(3);
+        *//*Map<String,String> map9 = Maps.newHashMapWithExpectedSize();*//*
+        map2.put(1, 1);
+        map2.put(2, 2);
+        map2.put(3, 3);
+        System.out.println("map2：" + map2);
+
+        //LinkedHashMap<K, V> 有序map
+        //Map<Integer,Integer> map3 = Maps.newLinkedHashMap();
+        Map<Integer, Integer> map3 = Maps.newLinkedHashMap(map1);
+        //Map<Integer,Integer> map3 = Maps.newLinkedHashMapWithExpectedSize(11);
+        map3.put(11, 11);
+        System.out.println("map3：" + map3);
+        for (Map.Entry<Integer, Integer> entry : map3.entrySet()){
+            System.out.print("key:" + entry.getKey() + "value:" + entry.getValue() + '\t');
+        }*/
     }
 
 
