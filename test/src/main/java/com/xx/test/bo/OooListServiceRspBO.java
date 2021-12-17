@@ -1,6 +1,6 @@
 package com.xx.test.bo;
 
-import com.xx.test.base.RspPage;
+import com.xx.test.base.page.RspPage;
 import lombok.Data;
 
 @Data
