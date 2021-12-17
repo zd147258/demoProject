@@ -61,6 +61,7 @@ public class OooServiceImpl implements OooService{
         OooPO qryParam = new OooPO();
         BeanUtils.copyProperties(reqBO, qryParam);
         log.info("qryParam:{}", JSON.toJSONString(qryParam));
+        log.info("qryParam:{}", JSON.toJSONString(qryParam));
         List<OooPO> qryResult = oooMapper.getListPage(qryParam, page);
         if (CollectionUtils.isEmpty(qryResult)){
             rspBO.setPageNo(0);
