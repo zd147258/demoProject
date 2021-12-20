@@ -7,7 +7,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 @Configuration
 public class ScheduleConfig {
-
+    /**
+     * 配置定时任务异步
+     * @return
+     */
     @Bean
     public TaskScheduler taskScheduler() {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
