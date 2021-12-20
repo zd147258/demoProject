@@ -1,0 +1,9 @@
+  ${AnsiColor.BRIGHT_CYAN}
+   _____       ___   _____       ___
+  |  _  \     /   | /  ___/     /   |
+  | |_| |    / /| | | |___     / /| |
+  |  _  {   / / | | \___  \   / / | |
+  | |_| |  / /  | |  ___| |  / /  | |
+  |_____/ /_/   |_| /_____/ /_/   |_|
+  Spring Boot Version: ${spring-boot.formatted-version}
+  ${AnsiColor.BRIGHT_CYAN}

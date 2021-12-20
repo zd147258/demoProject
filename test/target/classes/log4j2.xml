@@ -1,0 +1,57 @@
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<configuration status="WARN">
+    <Properties>
+        <!-- 全局参数 -->
+        <Property name="pattern">[%d{ISO8601} %-5p] %C{0}:%L -%m%n</Property>
+        <Property name="basePath">/app/iccec/logs/biz_smpc/</Property>
+        <Property name="displayName">service</Property>
+    </Properties>
+    <Appenders>
+        <!-- 控制台，指定输出格式和过滤器等级为ERROR -->
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <!-- 打印格式 -->
+            <PatternLayout pattern="${pattern}"/>
+        </Console>
+        <!-- 文件 Error日志 append=false每次启动清空错误日志-->
+        <File name="error" fileName="${basePath}/${displayName}_error.log" append="false">
+            <!-- 指定 error 级别的日志 -->
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY" />
+            <!-- 打印格式 -->
+            <PatternLayout pattern="${pattern}"/>
+        </File>
+        <!-- 滚动文件 -->
+        <RollingFile name="rollingFile" fileName="${basePath}/${displayName}.log"
+                     filePattern="${basePath}/${displayName}-%i.log">
+            <!-- 打印格式 -->
+            <PatternLayout pattern="${pattern}"/>
+            <!-- 每个日志文件50M，最多500个日志文件 -->
+            <SizeBasedTriggeringPolicy size="50 MB" />
+            <DefaultRolloverStrategy max="500"/>
+        </RollingFile>
+        <!-- 滚动文件 业务专用 -->
+        <RollingFile name="rollingFileBusiness" fileName="${basePath}/${displayName}_busi.log"
+                     filePattern="${basePath}/${displayName}_busi-%i.log">
+            <!-- 打印格式 -->
+            <PatternLayout pattern="${pattern}"/>
+            <!-- 每个日志文件50M，最多500个日志文件 -->
+            <SizeBasedTriggeringPolicy size="50 MB" />
+            <DefaultRolloverStrategy max="500"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <!-- 根据需要定义日志级别 -->
+        <Logger name="org.springframework" level="WARN" />
+        <Logger name="org.apache.dubbo" level="WARN" />
+        <Logger name="com.alibaba" level="WARN" />
+        <Logger name="com.taobao" level="WARN" />
+        <Logger name="com.xx.test" level="DEBUG">
+            <AppenderRef ref="rollingFileBusiness"></AppenderRef>
+        </Logger>
+        <!-- 日志根级别 -->
+        <Root level="WARN">
+            <AppenderRef ref="console"></AppenderRef>
+            <AppenderRef ref="error"></AppenderRef>
+            <AppenderRef ref="rollingFile"></AppenderRef>
+        </Root>
+    </Loggers>
+</configuration>
