@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xx.test.dao.SysDicDictionaryMapper">
+
+	<insert id="insert" parameterType="com.xx.test.po.SysDicDictionaryPO">
+		insert into sys_dic_dictionary(
+			CODE
+			,P_CODE
+			,SYS_CODE
+			,TITLE
+			,ORDER_ID
+			,DESCRIP
+			,CREATE_UID
+			,CREATE_TM
+			,UPDATE_UID
+			,UPDATE_TM
+			,DEL_FLAG
+		) values(
+			#{code}
+			,#{pCode}
+			,#{sysCode}
+			,#{title}
+			,#{orderId}
+			,#{descrip}
+			,#{createUid}
+			,#{createTm}
+			,#{updateUid}
+			,#{updateTm}
+			,#{delFlag}
+		)
+	</insert>
+
+	<delete id="deleteBy" parameterType="com.xx.test.po.SysDicDictionaryPO">
+		delete from sys_dic_dictionary
+		<where>
+			<if test="code != null and code != ''">
+				and CODE = #{code}
+			</if>
+			<if test="pCode != null and pCode != ''">
+				and P_CODE = #{pCode}
+			</if>
+			<if test="sysCode != null and sysCode != ''">
+				and SYS_CODE = #{sysCode}
+			</if>
+			<if test="title != null and title != ''">
+				and TITLE = #{title}
+			</if>
+			<if test="orderId != null">
+				and ORDER_ID = #{orderId}
+			</if>
+			<if test="descrip != null and descrip != ''">
+				and DESCRIP = #{descrip}
+			</if>
+			<if test="createUid != null">
+				and CREATE_UID = #{createUid}
+			</if>
+			<if test="createTm != null">
+				and CREATE_TM = #{createTm}
+			</if>
+			<if test="updateUid != null">
+				and UPDATE_UID = #{updateUid}
+			</if>
+			<if test="updateTm != null">
+				and UPDATE_TM = #{updateTm}
+			</if>
+			<if test="delFlag != null">
+				and DEL_FLAG = #{delFlag}
+			</if>
+		</where>
+	</delete>
+
+	<update id="updateById" parameterType="com.xx.test.po.SysDicDictionaryPO">
+		update sys_dic_dictionary
+		<set>
+			<if test="sysCode != null and sysCode != ''">
+				SYS_CODE = #{sysCode},
+			</if>
+			<if test="title != null and title != ''">
+				TITLE = #{title},
+			</if>
+			<if test="orderId != null">
+				ORDER_ID = #{orderId},
+			</if>
+			<if test="descrip != null and descrip != ''">
+				DESCRIP = #{descrip},
+			</if>
+			<if test="createUid != null">
+				CREATE_UID = #{createUid},
+			</if>
+			<if test="createTm != null">
+				CREATE_TM = #{createTm},
+			</if>
+			<if test="updateUid != null">
+				UPDATE_UID = #{updateUid},
+			</if>
+			<if test="updateTm != null">
+				UPDATE_TM = #{updateTm},
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG = #{delFlag},
+			</if>
+		</set>
+		<where>
+			<if test="code != null and code != ''">
+				and CODE = #{code}
+			</if>
+			<if test="pCode != null and pCode != ''">
+				and P_CODE = #{pCode}
+			</if>
+		</where>
+	</update>
+
+	<update id="updateBy">
+		update sys_dic_dictionary
+		<set>
+			<if test="set.code != null and set.code != ''">
+				CODE = #{set.code},
+			</if>
+			<if test="set.pCode != null and set.pCode != ''">
+				P_CODE = #{set.pCode},
+			</if>
+			<if test="set.sysCode != null and set.sysCode != ''">
+				SYS_CODE = #{set.sysCode},
+			</if>
+			<if test="set.title != null and set.title != ''">
+				TITLE = #{set.title},
+			</if>
+			<if test="set.orderId != null">
+				ORDER_ID = #{set.orderId},
+			</if>
+			<if test="set.descrip != null and set.descrip != ''">
+				DESCRIP = #{set.descrip},
+			</if>
+			<if test="set.createUid != null">
+				CREATE_UID = #{set.createUid},
+			</if>
+			<if test="set.createTm != null">
+				CREATE_TM = #{set.createTm},
+			</if>
+			<if test="set.updateUid != null">
+				UPDATE_UID = #{set.updateUid},
+			</if>
+			<if test="set.updateTm != null">
+				UPDATE_TM = #{set.updateTm},
+			</if>
+			<if test="set.delFlag != null">
+				DEL_FLAG = #{set.delFlag},
+			</if>
+		</set>
+		<where>
+			<if test="where.code != null and where.code != ''">
+				and CODE = #{where.code}
+			</if>
+			<if test="where.pCode != null and where.pCode != ''">
+				and P_CODE = #{where.pCode}
+			</if>
+			<if test="where.sysCode != null and where.sysCode != ''">
+				and SYS_CODE = #{where.sysCode}
+			</if>
+			<if test="where.title != null and where.title != ''">
+				and TITLE = #{where.title}
+			</if>
+			<if test="where.orderId != null">
+				and ORDER_ID = #{where.orderId}
+			</if>
+			<if test="where.descrip != null and where.descrip != ''">
+				and DESCRIP = #{where.descrip}
+			</if>
+			<if test="where.createUid != null">
+				and CREATE_UID = #{where.createUid}
+			</if>
+			<if test="where.createTm != null">
+				and CREATE_TM = #{where.createTm}
+			</if>
+			<if test="where.updateUid != null">
+				and UPDATE_UID = #{where.updateUid}
+			</if>
+			<if test="where.updateTm != null">
+				and UPDATE_TM = #{where.updateTm}
+			</if>
+			<if test="where.delFlag != null">
+				and DEL_FLAG = #{where.delFlag}
+			</if>
+		</where>
+	</update>
+
+	<select id="getCheckBy" parameterType="com.xx.test.po.SysDicDictionaryPO" resultType="java.lang.Integer">
+		select count(1) from sys_dic_dictionary
+		<where>
+			<if test="code != null and code != ''">
+				and CODE = #{code}
+			</if>
+			<if test="pCode != null and pCode != ''">
+				and P_CODE = #{pCode}
+			</if>
+			<if test="sysCode != null and sysCode != ''">
+				and SYS_CODE = #{sysCode}
+			</if>
+			<if test="title != null and title != ''">
+				and TITLE = #{title}
+			</if>
+			<if test="orderId != null">
+				and ORDER_ID = #{orderId}
+			</if>
+			<if test="descrip != null and descrip != ''">
+				and DESCRIP = #{descrip}
+			</if>
+			<if test="createUid != null">
+				and CREATE_UID = #{createUid}
+			</if>
+			<if test="createTm != null">
+				and CREATE_TM = #{createTm}
+			</if>
+			<if test="updateUid != null">
+				and UPDATE_UID = #{updateUid}
+			</if>
+			<if test="updateTm != null">
+				and UPDATE_TM = #{updateTm}
+			</if>
+			<if test="delFlag != null">
+				and DEL_FLAG = #{delFlag}
+			</if>
+		</where>
+	</select>
+
+	<select id="getModelBy" parameterType="com.xx.test.po.SysDicDictionaryPO" resultType="com.xx.test.po.SysDicDictionaryPO">
+		select
+			CODE as code
+			,P_CODE as pCode
+			,SYS_CODE as sysCode
+			,TITLE as title
+			,ORDER_ID as orderId
+			,DESCRIP as descrip
+			,CREATE_UID as createUid
+			,CREATE_TM as createTm
+			,UPDATE_UID as updateUid
+			,UPDATE_TM as updateTm
+			,DEL_FLAG as delFlag
+		from sys_dic_dictionary
+		<where>
+			<if test="code != null and code != ''">
+				and CODE = #{code}
+			</if>
+			<if test="pCode != null and pCode != ''">
+				and P_CODE = #{pCode}
+			</if>
+			<if test="sysCode != null and sysCode != ''">
+				and SYS_CODE = #{sysCode}
+			</if>
+			<if test="title != null and title != ''">
+				and TITLE = #{title}
+			</if>
+			<if test="orderId != null">
+				and ORDER_ID = #{orderId}
+			</if>
+			<if test="descrip != null and descrip != ''">
+				and DESCRIP = #{descrip}
+			</if>
+			<if test="createUid != null">
+				and CREATE_UID = #{createUid}
+			</if>
+			<if test="createTm != null">
+				and CREATE_TM = #{createTm}
+			</if>
+			<if test="updateUid != null">
+				and UPDATE_UID = #{updateUid}
+			</if>
+			<if test="updateTm != null">
+				and UPDATE_TM = #{updateTm}
+			</if>
+			<if test="delFlag != null">
+				and DEL_FLAG = #{delFlag}
+			</if>
+		</where>
+	</select>
+
+	<select id="getList" parameterType="com.xx.test.po.SysDicDictionaryPO" resultType="com.xx.test.po.SysDicDictionaryPO">
+		select
+			CODE as code
+			,P_CODE as pCode
+			,SYS_CODE as sysCode
+			,TITLE as title
+			,ORDER_ID as orderId
+			,DESCRIP as descrip
+			,CREATE_UID as createUid
+			,CREATE_TM as createTm
+			,UPDATE_UID as updateUid
+			,UPDATE_TM as updateTm
+			,DEL_FLAG as delFlag
+		from sys_dic_dictionary
+		<where>
+			<if test="code != null and code != ''">
+				and CODE = #{code}
+			</if>
+			<if test="pCode != null and pCode != ''">
+				and P_CODE = #{pCode}
+			</if>
+			<if test="sysCode != null and sysCode != ''">
+				and SYS_CODE = #{sysCode}
+			</if>
+			<if test="title != null and title != ''">
+				and TITLE = #{title}
+			</if>
+			<if test="orderId != null">
+				and ORDER_ID = #{orderId}
+			</if>
+			<if test="descrip != null and descrip != ''">
+				and DESCRIP = #{descrip}
+			</if>
+			<if test="createUid != null">
+				and CREATE_UID = #{createUid}
+			</if>
+			<if test="createTm != null">
+				and CREATE_TM = #{createTm}
+			</if>
+			<if test="updateUid != null">
+				and UPDATE_UID = #{updateUid}
+			</if>
+			<if test="updateTm != null">
+				and UPDATE_TM = #{updateTm}
+			</if>
+			<if test="delFlag != null">
+				and DEL_FLAG = #{delFlag}
+			</if>
+		</where>
+		<!-- 鎺掑簭淇℃伅 -->
+		<if test="orderBy != null and orderBy != ''">
+			ORDER BY ${orderBy}
+		</if>
+	</select>
+
+	<select id="getListPage" parameterType="com.xx.test.po.SysDicDictionaryPO" resultType="com.xx.test.po.SysDicDictionaryPO">
+		select
+			CODE as code
+			,P_CODE as pCode
+			,SYS_CODE as sysCode
+			,TITLE as title
+			,ORDER_ID as orderId
+			,DESCRIP as descrip
+			,CREATE_UID as createUid
+			,CREATE_TM as createTm
+			,UPDATE_UID as updateUid
+			,UPDATE_TM as updateTm
+			,DEL_FLAG as delFlag
+		from sys_dic_dictionary
+		<where>
+			<if test="code != null and code != ''">
+				and CODE = #{code}
+			</if>
+			<if test="pCode != null and pCode != ''">
+				and P_CODE = #{pCode}
+			</if>
+			<if test="sysCode != null and sysCode != ''">
+				and SYS_CODE = #{sysCode}
+			</if>
+			<if test="title != null and title != ''">
+				and TITLE = #{title}
+			</if>
+			<if test="orderId != null">
+				and ORDER_ID = #{orderId}
+			</if>
+			<if test="descrip != null and descrip != ''">
+				and DESCRIP = #{descrip}
+			</if>
+			<if test="createUid != null">
+				and CREATE_UID = #{createUid}
+			</if>
+			<if test="createTm != null">
+				and CREATE_TM = #{createTm}
+			</if>
+			<if test="updateUid != null">
+				and UPDATE_UID = #{updateUid}
+			</if>
+			<if test="updateTm != null">
+				and UPDATE_TM = #{updateTm}
+			</if>
+			<if test="delFlag != null">
+				and DEL_FLAG = #{delFlag}
+			</if>
+		</where>
+		<!-- 鎺掑簭淇℃伅 -->
+		<if test="orderBy != null and orderBy != ''">
+			ORDER BY ${orderBy}
+		</if>
+	</select>
+
+	<insert id="insertBatch" parameterType="java.util.List">
+		insert into sys_dic_dictionary(
+			CODE
+			,P_CODE
+			,SYS_CODE
+			,TITLE
+			,ORDER_ID
+			,DESCRIP
+			,CREATE_UID
+			,CREATE_TM
+			,UPDATE_UID
+			,UPDATE_TM
+			,DEL_FLAG
+		) values
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+			#{item.code}
+			,#{item.pCode}
+			,#{item.sysCode}
+			,#{item.title}
+			,#{item.orderId}
+			,#{item.descrip}
+			,#{item.createUid}
+			,#{item.createTm}
+			,#{item.updateUid}
+			,#{item.updateTm}
+			,#{item.delFlag}
+		)
+		</foreach>
+	</insert>
+
+</mapper>
