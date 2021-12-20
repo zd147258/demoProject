@@ -5,7 +5,7 @@ import com.xx.test.bo.OooListServiceReqBO;
 import com.xx.test.bo.OooListServiceRspBO;
 import com.xx.test.bo.OooServiceReqBO;
 import com.xx.test.bo.OooServiceRspBO;
-import com.xx.test.service.OooService;
+import com.xx.test.service.impl.OooService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

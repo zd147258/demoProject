@@ -1,4 +1,4 @@
-package com.xx.test.service;
+package com.xx.test.service.impl;
 
 import com.xx.test.bo.OooListServiceReqBO;
 import com.xx.test.bo.OooListServiceRspBO;

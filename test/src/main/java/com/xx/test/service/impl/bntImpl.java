@@ -1,4 +1,4 @@
-package com.xx.test.service;
+package com.xx.test.service.impl;
 
 import com.xx.test.po.IntPushFwaProtocolBsReqBO;
 import com.xx.test.po.IntPushFwaProtocolBsRspBO;

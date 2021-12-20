@@ -1,13 +1,7 @@
 package com.xx.test.schedule;
 
-import com.alibaba.fastjson.JSON;
-import com.xx.test.bo.OooServiceReqBO;
-import com.xx.test.bo.OooServiceRspBO;
-import com.xx.test.service.OooService;
-import com.xx.test.service.OooServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @EnableScheduling
