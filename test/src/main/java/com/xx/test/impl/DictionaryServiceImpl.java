@@ -3,7 +3,7 @@ package com.xx.test.impl;
 import com.alibaba.fastjson.JSON;
 import com.xx.test.dao.SysDicDictionaryMapper;
 import com.xx.test.po.SysDicDictionaryPO;
-import com.xx.test.service.DictionaryService;
+import com.xx.test.service.impl.DictionaryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

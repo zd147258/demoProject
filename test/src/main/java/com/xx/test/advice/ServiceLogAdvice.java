@@ -23,11 +23,11 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * 类名：ServiceLogAdvice
- * 描述：服务日志切面
- * 时间：2021/8/13 10:53
- * @author SuJingchun
- */
+ * 标题: ServiceLogAdvice
+ * 说明: 服务日志切面
+ * 时间: 2021/12/20 14:14
+ * @author 郑冬
+ **/
 @Aspect
 @Component
 @Order(value = 20)
@@ -68,12 +68,12 @@ public class ServiceLogAdvice {
     /**
      * 切点
      */
-    @Pointcut("(execution(* cn.ccccltd.*..service.impl..*.*(..)))" +
-            " || (execution(* cn.ccccltd.*..atom.impl..*.*(..)))")
+    @Pointcut("(execution(* com.xx.*..service.impl..*.*(..)))" +
+            " || (execution(* com.xx.*..atom.impl..*.*(..)))")
     public void pointCut() {
     }
 
-    @Pointcut("(execution(* cn.ccccltd.*..service.impl..*.*(..)))")
+    @Pointcut("(execution(* com.xx.*..service.impl..*.*(..)))")
     public void abilityPointCut() {
     }
 

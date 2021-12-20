@@ -1,4 +1,4 @@
-package com.xx.test.service;
+package com.xx.test.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
