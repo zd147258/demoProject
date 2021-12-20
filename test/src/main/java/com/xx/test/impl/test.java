@@ -9,7 +9,6 @@ import com.xx.test.service.OooService;
 import com.xx.test.service.OooServiceImpl;
 import com.xx.test.util.AesUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
