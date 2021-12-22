@@ -87,8 +87,11 @@ public class ServiceLogAdvice {
             //设置线程全局map
             Map<String, String> mapInfo = Maps.newHashMapWithExpectedSize(2);
             UUID uuid = UUID.randomUUID();
+            System.out.println("uuid:" + uuid);
             mapInfo.put(TRACE_IDENTIFICATION, uuid.toString().replace("-", ""));
+            System.out.println("mapinfo:" + JSON.toJSONString(mapInfo));
             mapInfo.put(START_IDENTIFICATION, Long.toString(System.currentTimeMillis()));
+            System.out.println("mapinfo:" + JSON.toJSONString(mapInfo));
             THREAD_MAP.set(mapInfo);
         }
 
@@ -260,7 +263,7 @@ public class ServiceLogAdvice {
         logHead.append(className);
         logHead.append(CLASS_METHOD_SEPARATOR);
         logHead.append(methodString);
-        log.info(logHead.toString());
+        log.info("logHead:{}", logHead.toString());
         return logHead.toString();
     }
 
