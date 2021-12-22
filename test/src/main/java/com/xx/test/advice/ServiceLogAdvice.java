@@ -127,7 +127,7 @@ public class ServiceLogAdvice {
             }
         }
         // 打印接口服务请求日志
-        log.info(getLogInfoByStrings(infos));
+        log.info("打印接口服务请求日志:" + getLogInfoByStrings(infos));
     }
 
     /**
@@ -156,18 +156,21 @@ public class ServiceLogAdvice {
             if (!StringUtils.hasText(desc)) {
                 desc = BaseRspConstants.RSP_DESC_FAILD;
             }
+            log.info("环绕1");
             printAopErrorLog(e, "业务调用失败原因：", pjp);
             this.putCodeToRsp(rspObj, msgCode, desc);
         } catch (DataAccessException e) {
             if (!VOID_NM.equals(rspClass.getSimpleName())) {
                 rspObj = rspClass.newInstance();
             }
+            log.info("环绕2");
             printAopErrorLog(e, "数据异常信息：", pjp);
             this.putCodeToRsp(rspObj, BaseRspConstants.RSP_CODE_DbErrorOccurred, "数据异常:" + e.getCause().getMessage());
         } catch (Throwable e) {
             if (!VOID_NM.equals(rspClass.getSimpleName())) {
                 rspObj = rspClass.newInstance();
             }
+            log.info("环绕3");
             printAopErrorLog(e, "服务调用异常信息：", pjp);
             this.putCodeToRsp(rspObj, BaseRspConstants.RSP_CODE_ERROR, BaseRspConstants.RSP_DESC_ERROR + ":" + e.getMessage());
         }
@@ -317,6 +320,7 @@ public class ServiceLogAdvice {
             }
         } else if (object instanceof RspBaseBO) {
             Field field = RspBaseBO.class.getDeclaredField("code");
+            log.info("field:" + field);
             // 如果业务中已经加入的返回值，则不予以赋值
             field.setAccessible(true);
             if (field.get(object) == null) {
