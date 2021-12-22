@@ -2,7 +2,7 @@
 <configuration status="WARN">
     <Properties>
         <!-- 全局参数 -->
-        <Property name="pattern">[%d{ISO8601} %-5p] %C{0}:%L -%m%n</Property>
+        <Property name="pattern">[%d{ISO8601} %-5p] %C{1}:%L -%m%n</Property>
         <Property name="basePath">/app/iccec/logs/biz_smpc/</Property>
         <Property name="displayName">service</Property>
     </Properties>

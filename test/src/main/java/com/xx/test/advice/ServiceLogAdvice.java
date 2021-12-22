@@ -82,12 +82,16 @@ public class ServiceLogAdvice {
      */
     @Before("pointCut()")
     public void deBefore(JoinPoint jp) {
+        log.info("前置通知");
         if (THREAD_MAP.get() == null) {
             //设置线程全局map
             Map<String, String> mapInfo = Maps.newHashMapWithExpectedSize(2);
             UUID uuid = UUID.randomUUID();
+            System.out.println("uuid:" + uuid);
             mapInfo.put(TRACE_IDENTIFICATION, uuid.toString().replace("-", ""));
+            System.out.println("mapinfo:" + JSON.toJSONString(mapInfo));
             mapInfo.put(START_IDENTIFICATION, Long.toString(System.currentTimeMillis()));
+            System.out.println("mapinfo:" + JSON.toJSONString(mapInfo));
             THREAD_MAP.set(mapInfo);
         }
 
@@ -123,7 +127,7 @@ public class ServiceLogAdvice {
             }
         }
         // 打印接口服务请求日志
-        log.info(getLogInfoByStrings(infos));
+        log.info("打印接口服务请求日志:" + getLogInfoByStrings(infos));
     }
 
     /**
@@ -131,6 +135,7 @@ public class ServiceLogAdvice {
      */
     @Around("pointCut()")
     public Object around(ProceedingJoinPoint pjp) throws IllegalAccessException, InstantiationException, NoSuchFieldException {
+        log.info("环绕通知");
         MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
         Method method = methodSignature.getMethod();
         Class<?> rspClass = method.getReturnType();
@@ -151,18 +156,21 @@ public class ServiceLogAdvice {
             if (!StringUtils.hasText(desc)) {
                 desc = BaseRspConstants.RSP_DESC_FAILD;
             }
+            log.info("环绕1");
             printAopErrorLog(e, "业务调用失败原因：", pjp);
             this.putCodeToRsp(rspObj, msgCode, desc);
         } catch (DataAccessException e) {
             if (!VOID_NM.equals(rspClass.getSimpleName())) {
                 rspObj = rspClass.newInstance();
             }
+            log.info("环绕2");
             printAopErrorLog(e, "数据异常信息：", pjp);
             this.putCodeToRsp(rspObj, BaseRspConstants.RSP_CODE_DbErrorOccurred, "数据异常:" + e.getCause().getMessage());
         } catch (Throwable e) {
             if (!VOID_NM.equals(rspClass.getSimpleName())) {
                 rspObj = rspClass.newInstance();
             }
+            log.info("环绕3");
             printAopErrorLog(e, "服务调用异常信息：", pjp);
             this.putCodeToRsp(rspObj, BaseRspConstants.RSP_CODE_ERROR, BaseRspConstants.RSP_DESC_ERROR + ":" + e.getMessage());
         }
@@ -175,6 +183,7 @@ public class ServiceLogAdvice {
      */
     @AfterReturning(returning = "rspObj", pointcut = "pointCut() && abilityPointCut()")
     public void doAfterCall(JoinPoint jp, Object rspObj) {
+        log.info("后置返回通知，方法正常返回后执行");
         //打印日志
         doAfterReturning(jp, rspObj);
         //每次调用返回后初始化全局参数
@@ -186,6 +195,7 @@ public class ServiceLogAdvice {
      */
     @AfterReturning(returning = "rspObj", pointcut = "pointCut() && !abilityPointCut()")
     public void doAfterReturning(JoinPoint jp, Object rspObj) {
+        log.info("后置返回通知，方法正常返回后执行");
         String[] infos = new String[5];
         infos[0] = getLogHeadInfo(jp);
         long nowTime = System.currentTimeMillis();
@@ -231,6 +241,7 @@ public class ServiceLogAdvice {
      */
     @AfterThrowing(throwing = "ex", pointcut = "pointCut()")
     public void doAfterThrowing(JoinPoint jp, Throwable ex) {
+        log.info("后置异常通知，方法异常时执行");
         printAopErrorLog(ex, "环绕通知异常信息：", jp);
     }
 
@@ -238,6 +249,7 @@ public class ServiceLogAdvice {
      * 获取日志头信息
      */
     private String getLogHeadInfo(JoinPoint jp) {
+        log.info("获取日志头信息");
         // 添加调用链traceId
         StringBuilder logHead;
         try {
@@ -254,7 +266,7 @@ public class ServiceLogAdvice {
         logHead.append(className);
         logHead.append(CLASS_METHOD_SEPARATOR);
         logHead.append(methodString);
-
+        log.info("logHead:{}", logHead.toString());
         return logHead.toString();
     }
 
@@ -262,6 +274,7 @@ public class ServiceLogAdvice {
      * 转换日志信息
      */
     private String getLogInfoByStrings(String[] infos) {
+        log.info("转换日志信息");
         StringBuilder str = new StringBuilder();
         for (String info : infos) {
             if (!StringUtils.hasText(info)) {
@@ -279,6 +292,7 @@ public class ServiceLogAdvice {
      * 打印错误日志
      */
     private void printAopErrorLog(Throwable e, String desc, JoinPoint jp) {
+        log.info("打印错误日志");
         String[] infos = new String[3];
         infos[0] = getLogHeadInfo(jp);
         // 修改标识为结束标识
@@ -293,6 +307,7 @@ public class ServiceLogAdvice {
      * 出参赋值
      */
     private void putCodeToRsp(Object object, String code, String desc) throws NoSuchFieldException, IllegalAccessException {
+        log.info("出参赋值");
         if (object instanceof RspPage) {
             Field field = RspPage.class.getSuperclass().getDeclaredField("code");
             // 如果业务中已经加入的返回值，则不予以赋值
@@ -305,6 +320,7 @@ public class ServiceLogAdvice {
             }
         } else if (object instanceof RspBaseBO) {
             Field field = RspBaseBO.class.getDeclaredField("code");
+            log.info("field:" + field);
             // 如果业务中已经加入的返回值，则不予以赋值
             field.setAccessible(true);
             if (field.get(object) == null) {
