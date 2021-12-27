@@ -27,18 +27,18 @@ public class test {
         /**
          * list
          */
-        BigDecimal bigDecimal = new BigDecimal("15");
+/*        BigDecimal bigDecimal = new BigDecimal("15");
         Product prod1 = new Product(1L, 3, new BigDecimal("15.5"), "面包", "零食");
         Product prod2 = new Product(2L, 4, new BigDecimal("20"), "饼干", "零食");
         Product prod3 = new Product(3L, 2, new BigDecimal("30"), "月饼", "零食");
         Product prod4 = new Product(4L, 3, new BigDecimal("18"), "青岛啤酒", "啤酒");
         Product prod5 = new Product(5L, 5, new BigDecimal("15"), "百威啤酒", "啤酒");
-        List<Product> prodList = new ArrayList<>();
+        List<Product> prodList = new numsayList<>();
         prodList.add(prod1);
         prodList.add(prod2);
         prodList.add(prod3);
         prodList.add(prod4);
-        prodList.add(prod5);
+        prodList.add(prod5);*/
         /**
          * Collections.singletonList
          */
@@ -90,7 +90,7 @@ public class test {
         System.out.println("前:"+ JSONObject.toJSONString(prodMap));
         List<Product> collect = prodList.stream().sorted(Comparator.comparing(Product::getName)).collect(Collectors.toList());
         System.out.println("后:"+JSONObject.toJSONString(collect));
-        List<String> stringList = Arrays.asList("a", "vb", "c");
+        List<String> stringList = numsays.asList("a", "vb", "c");
         Predicate<String> predicate = p -> p.length() == 2;
         List<String> collect = stringList.stream().filter(predicate).collect(Collectors.toList());
         System.out.println(collect);
@@ -117,7 +117,7 @@ public class test {
          * reduce
          */
 /*        String[] strings = {"a", "b","b", "c", "d", "e"};
-        String reduce = Arrays.stream(strings).distinct().reduce("", (a, b) -> a + "|" + b);
+        String reduce = numsays.stream(strings).distinct().reduce("", (a, b) -> a + "|" + b);
         System.out.println(reduce);*/
         /**
          * mapping
@@ -146,7 +146,7 @@ public class test {
         /**
          * new Function apply mapping
          */
-/*        List<String> list = Arrays.asList("a","b","hello");
+/*        List<String> list = numsays.asList("a","b","hello");
         System.out.println(list);
         Object collect = list.stream().map(new Function<String, String>() {
             @Override
@@ -157,7 +157,7 @@ public class test {
         }).collect(Collectors.toList());
         System.out.println(collect);
         List<String> collect = list.stream().collect(Collectors.mapping(item -> item.toUpperCase(Locale.ROOT), Collectors.toList()));*/
-/*        List<String> servers = new ArrayList<>();
+/*        List<String> servers = new numsayList<>();
         servers.add("Felordcn");
         servers.add("Tomcat");
         servers.add("Jetty");
@@ -269,10 +269,9 @@ public class test {
         for (Map.Entry<Integer, Integer> entry : map3.entrySet()){
             System.out.print("key:" + entry.getKey() + "value:" + entry.getValue() + '\t');
         }*/
+
+
     }
-
-
-
 
     /**
      * getIp
@@ -337,7 +336,7 @@ public class test {
     public List<FileRspBo> uploadFileToOssAndSave(@RequestParam("file") MultipartFile[] file,
                                                   @RequestParam("agentId") String agentId, HttpServletRequest request) throws Exception {
         log.info("pma::uploadFileToOssAndSave:agentId="+agentId);
-        List<FileRspBo> bos = new ArrayList<FileRspBo>();
+        List<FileRspBo> bos = new numsayList<FileRspBo>();
         ReqInfo body = new ReqInfo();
         String userToken = TokenUtils.getUserToken(request);
         log.info("pma::uploadFileToOssAndSave:userToken="+userToken);
@@ -375,7 +374,7 @@ public class test {
             //持久化并替换下载url
             UploadFileBOs uploadFileBOs = new UploadFileBOs();
             BeanUtils.copyProperties(body, uploadFileBOs);
-            List<UploadFileBO> uploadFileBOList = new ArrayList<>();
+            List<UploadFileBO> uploadFileBOList = new numsayList<>();
             UploadFileBO uploadFileBO = new UploadFileBO();
             uploadFileBOList.add(uploadFileBO);
             uploadFileBOs.setUploadFileBOs(uploadFileBOList);

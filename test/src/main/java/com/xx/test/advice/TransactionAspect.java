@@ -31,7 +31,7 @@ public class TransactionAspect {
     /**
      * 定义切点路径
      */
-    private static final String AOP_POINTCUT_EXPRESSION = "execution(* cn.ccccltd.*..service..*.*(..))";
+    private static final String AOP_POINTCUT_EXPRESSION = "execution(* com.xx.*..service..*.*(..))";
 
     @Autowired
     private PlatformTransactionManager transactionManager;
