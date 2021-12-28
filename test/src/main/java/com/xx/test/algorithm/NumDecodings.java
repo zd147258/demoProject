@@ -40,10 +40,8 @@ public class NumDecodings {
         }
         char[] chars = s.toCharArray();
         for (int i = 0; i < s.length(); i++) {
-            System.out.println("char:" + chars[i]);
             //取一位
             String s1 = map.get(Character.getNumericValue(chars[i]));
-            System.out.println("s1" + s1);
         }
     }
 }
