@@ -1,47 +1,34 @@
 package com.xx.test.algorithm;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class NumDecodings {
     public static void main(String[] args) {
-        NumDecodings numDecodings = new NumDecodings();
-        System.out.println(numDecodings.numDecodings("001012"));
+        int i = NumDecodings.numDecodings("001022");
+        System.out.println(i);
     }
 
-    public Map<Integer, String> createMap(){
-        Map<Integer, String> map = new HashMap<>();
-        char ch = 'a';
-        for (int i = 1; i < 27; i++) {
-            map.put(i, String.valueOf(ch++));
-        }
-        return map;
-    }
 
-    int result;
-
-    public int numDecodings(String s) {
-        backtrack(createMap(), s);
-        return result;
-    }
-
-    private void backtrack(Map<Integer, String> map, String s){
-        //终止条件
-//        if (){
-//
-//        }
-        for (int i = 0; i < s.length(); i++) {
-            String str = s.substring(i, i+1);
-            if (!("0".equals(str))){
-                s = s.substring(i, s.length());
-                break;
+    public static int numDecodings(String s) {
+        int n = s.length();
+        // a = f[i-2], b = f[i-1], c=f[i]
+        int[] f = new int[n + 1];
+        f[0] = 1;
+        int a = 0, b = 1, c = 0;
+        for (int i = 1; i <= n; ++i) {
+            c = 0;
+            if (s.charAt(i - 1) != '0') {
+                // c += b;
+                f[i] = f[i - 1];
+                // f[i] += f[i - 1];
             }
+            if (i > 1 && s.charAt(i - 2) != '0' && ((s.charAt(i - 2) - '0') * 10 + (s.charAt(i - 1) - '0') <= 26)) {
+                // c += a;
+                f[i] += f[i - 2];
+            }
+            // a = b;
+            // b = c;
         }
-        char[] chars = s.toCharArray();
-        for (int i = 0; i < s.length(); i++) {
-            //取一位
-            String s1 = map.get(Character.getNumericValue(chars[i]));
-        }
+        //return c;
+        return f[n];
     }
 }

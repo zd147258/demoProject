@@ -17,11 +17,6 @@ public class ThreeSum {
     
     public List<List<Integer>> threeSum(int[] nums){
         Arrays.sort(nums);
-        System.out.print("排序：");
-        for (int i = 0; i < nums.length; i++) {
-            System.out.print(nums[i] + " ");
-        }
-        System.out.println();
         callback(nums, 0, 0);
         return result;
     }
@@ -38,7 +33,6 @@ public class ThreeSum {
                 break;
             }
             if (i > depth && nums[i] == nums[i - 1]) {
-                System.out.println("=================continue了================");
                 continue;
             }
             list.add(nums[i]);
