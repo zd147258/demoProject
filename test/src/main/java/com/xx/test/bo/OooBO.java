@@ -3,6 +3,8 @@ package com.xx.test.bo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 public class OooBO implements Serializable {
@@ -11,4 +13,6 @@ public class OooBO implements Serializable {
     private Long id;
     private String name;
     private String idStr;
+    private Map<Long, Long> testMap;
+    private Map<String, String> tradingUnitQryMap = new HashMap<>();
 }

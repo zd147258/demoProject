@@ -56,7 +56,6 @@ public class OooServiceImpl implements OooService{
     @Override
     public OooListServiceRspBO selectListOoo(OooListServiceReqBO reqBO) {
         OooListServiceRspBO rspBO = new OooListServiceRspBO();
-        List<OooBO> rows = new ArrayList<>();
         Page<OooPO> page = new Page<>(reqBO.getPageNo(), reqBO.getPageSize());
         OooPO qryParam = new OooPO();
         BeanUtils.copyProperties(reqBO, qryParam);
@@ -70,9 +69,21 @@ public class OooServiceImpl implements OooService{
             rspBO.setMessage(BaseRspConstants.RSP_DESC_SUCCESS);
             return rspBO;
         }
-        String jsonString = JSON.toJSONString(qryResult, SerializerFeature.WriteMapNullValue);
-        List<OooBO> oooBOS = JSON.parseArray(jsonString, OooBO.class);
-        rows.addAll(oooBOS);
+        List<OooBO> rows = new ArrayList<>();
+        long start = System.currentTimeMillis();
+//        String jsonString = JSON.toJSONString(qryResult, SerializerFeature.WriteMapNullValue);
+//        List<OooBO> oooBOS = JSON.parseArray(jsonString, OooBO.class);
+
+        for (OooPO po : qryResult){
+            OooBO bo = new OooBO();
+            BeanUtils.copyProperties(po, bo);
+            rows.add(bo);
+        }
+        long end = System.currentTimeMillis();
+        long l = end - start;
+        log.info("start:" + start );
+        log.info("end:" + end );
+        log.info("l:" + l );
         rspBO.setRows(rows);
         rspBO.setRecordsTotal(page.getTotalCount());
         rspBO.setTotal(page.getTotalPages());
